@@ -17,11 +17,12 @@ if __name__ == "__main__":
     running = True
     match_screen = MatchScreen(screen, player_1)
     hand = player_1.get_hand()
+    dragging = False
     while running:
-
+        # TODO: get dictionary of events, separating by type of event to listen.
         events = match_screen.draw_screen()
 
-        running = event_handler(events)
+        running, dragging = event_handler(events, dragging)
         pygame.display.flip()
         clock.tick(60)
     

@@ -16,8 +16,10 @@ class CardInterface:
     def draw_straight(self, screen):
         screen.blit(self.image, self.xy)
 
-    def check_if_inside(self, x, y):
+    def check_if_inside(self, x, y) -> bool:
         if self.xy.x < x < (self.xy.x + self.wh.x) and self.xy.y < y < (
             self.xy.y + self.wh.y
         ):
             self.xy = pygame.Vector2(x-self.wh.x/2, y-self.wh.y/2)
+            return True
+        return False
