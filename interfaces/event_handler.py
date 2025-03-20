@@ -1,5 +1,4 @@
 import pygame
-import interfaces.colors as colors
 
 def event_handler(to_check):
 
