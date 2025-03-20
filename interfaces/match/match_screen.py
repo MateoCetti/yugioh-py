@@ -3,24 +3,34 @@ import pygame
 from .hand import handInterface
 from .button import Button
 from .. import colors
+from ..event_handler import EventHandler
 
 from game.player import Player
 
-class MatchScreen():
+
+class MatchScreen:
     def __init__(self, screen, player: Player):
+        self.event_handler = EventHandler()
         self.player = player
         self.screen = screen
+        self.button = Button(
+            500, 500, 100, 25, colors.BLUE, "draw", self.player.draw_card
+        )
         self.hand = handInterface()
+        
 
-    def _screen_fill(self):
-        self.screen.fill(colors.GRAY)
+    def _update_events(self):
+        if len(self.player.get_hand()) > len(self.hand.get_cards()):
+            self.hand.create_card(self.player.get_hand()[-1])
+        self.event_handler.set_subscribers(
+            "on_mouse_button_down", [self.button, *self.hand.get_cards()]
+        )
 
+    def handle_events(self) -> bool:
+        self._update_events()
+        return self.event_handler.handle_events()
 
     def draw_screen(self):
-        button = Button(500, 500, 100, 25, colors.BLUE, "draw", self.player.draw_card)
-        self._screen_fill()
-        button.draw(self.screen)
-        if (len(self.player.get_hand()) > len(self.hand.get_cards())):
-            self.hand.create_card(self.player.get_hand()[-1])
+        self.screen.fill(colors.GRAY)
+        self.button.draw(self.screen)
         self.hand.draw(self.screen)
-        return [button, *self.hand.get_cards()]

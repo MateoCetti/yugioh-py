@@ -1,7 +1,6 @@
 import pygame
 from game.player import Player
 from decks.yugi_deck.deck import yugi_deck
-from interfaces.event_handler import EventHandler
 from interfaces.match.match_screen import MatchScreen
 
 
@@ -17,12 +16,9 @@ if __name__ == "__main__":
     running = True
     match_screen = MatchScreen(screen, player_1)
     hand = player_1.get_hand()
-    event_handler = EventHandler()
     while running:
-        # TODO: get dictionary of events, separating by type of event to listen.
-        events = match_screen.draw_screen()
-        event_handler.set_subscribers("on_mouse_button_down" ,events)
-        running = event_handler.handle_events()
+        running = match_screen.handle_events()
+        match_screen.draw_screen()
         pygame.display.flip()
         clock.tick(60)
     
