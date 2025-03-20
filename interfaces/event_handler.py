@@ -8,7 +8,8 @@ def event_handler(to_check):
             return False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             x, y = event.pos
-            to_check[0].check_if_inside(x, y)
+            for event in to_check:
+                event.check_if_inside(x, y) 
         elif event.type == pygame.KEYDOWN:
             if event.dict["key"] == 27:
                 return False
