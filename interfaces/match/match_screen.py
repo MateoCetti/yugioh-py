@@ -12,5 +12,5 @@ def draw_screen(screen, player: Player):
     button = Button(500, 500, 100, 25, colors.BLUE, "draw", player.draw_card)
     _screen_fill(screen)
     button.draw(screen)
-    draw_hand(screen, hand)
-    return [button]
+    cards = draw_hand(screen, hand)
+    return [button, *cards]
