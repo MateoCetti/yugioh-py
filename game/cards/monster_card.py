@@ -2,8 +2,8 @@ from .card import Card
 
 
 class MonsterCard(Card):
-    def __init__(self, name, description, attack, defense, level, attribute):
-        super().__init__(name, description)
+    def __init__(self, name, description, image, attack, defense, level, attribute):
+        super().__init__(name, description, image)
         self.attack = attack
         self.defense = defense
         self.level = level

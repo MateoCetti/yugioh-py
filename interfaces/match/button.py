@@ -1,8 +1,10 @@
 import pygame
-import interface.colors as colors
+import interfaces.colors as colors
 
 class Button:
+
     def __init__(self, x, y, width, height, color, text,func):
+        self.font = pygame.font.Font(None, 20)
         self.x = x
         self.y = y
         self.width = width
@@ -11,9 +13,9 @@ class Button:
         self.text = text
         self.function = func
 
-    def draw(self, screen, font):
+    def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
-        text_surface = font.render(self.text, True, colors.WHITE)
+        text_surface = self.font.render(self.text, True, colors.WHITE)
         screen.blit(text_surface, (self.x + 10, self.y + 10))
 
     def check_if_inside(self, x,y):
