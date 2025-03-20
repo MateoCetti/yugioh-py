@@ -1,7 +1,7 @@
 import pygame
+from interfaces.event import Event
 
-
-class CardInterface:
+class CardInterface(Event):
     def __init__(self, image, xy: pygame.Vector2, resize):
         aux =  pygame.image.load(image)
         self.xy = xy
