@@ -2,25 +2,22 @@ import pygame
 
 
 class CardInterface:
-    def __init__(self, image, xy: pygame.Vector2):
-        self.image = pygame.image.load(image)
+    def __init__(self, image, xy: pygame.Vector2, resize):
+        aux =  pygame.image.load(image)
         self.xy = xy
         self.wh = pygame.Vector2(
-            self.image.get_width(), self.image.get_height()
+            aux.get_width()*resize, aux.get_height()*resize
         )  # width and height
-
-    def draw_straight(self, screen, resize):
-        scaled_image = pygame.transform.scale(
-            self.image,
-            (self.image.get_width() * resize, self.image.get_height() * resize),
+        self.image = pygame.transform.scale(
+           aux,
+            (aux.get_width() * resize, aux.get_height() * resize),
         )
-        screen.blit(scaled_image, self.xy)
+
+    def draw_straight(self, screen):
+        screen.blit(self.image, self.xy)
 
     def check_if_inside(self, x, y):
-        if (
-            x > self.xy.x
-            and x < self.xy.x + self.wh.x
-            and y > self.xy.y
-            and y < self.xy.y + self.wh.y
+        if self.xy.x < x < (self.xy.x + self.wh.x) and self.xy.y < y < (
+            self.xy.y + self.wh.y
         ):
-            self.xy = pygame.Vector2(x, y)
+            self.xy = pygame.Vector2(x-self.wh.x/2, y-self.wh.y/2)

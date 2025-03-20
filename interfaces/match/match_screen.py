@@ -1,16 +1,26 @@
-from interfaces.match.hand import draw_hand
+import pygame
+
+from .hand import handInterface
 from .button import Button
 from .. import colors
 
 from game.player import Player
 
-def _screen_fill(screen):
-    screen.fill(colors.GRAY)
+class MatchScreen():
+    def __init__(self, screen, player: Player):
+        self.player = player
+        self.screen = screen
+        self.hand = handInterface()
 
-def draw_screen(screen, player: Player):
-    hand = player.get_hand()
-    button = Button(500, 500, 100, 25, colors.BLUE, "draw", player.draw_card)
-    _screen_fill(screen)
-    button.draw(screen)
-    cards = draw_hand(screen, hand)
-    return [button, *cards]
+    def _screen_fill(self):
+        self.screen.fill(colors.GRAY)
+
+
+    def draw_screen(self):
+        button = Button(500, 500, 100, 25, colors.BLUE, "draw", self.player.draw_card)
+        self._screen_fill()
+        button.draw(self.screen)
+        if (len(self.player.get_hand()) > len(self.hand.get_cards())):
+            self.hand.create_card(self.player.get_hand()[-1])
+        self.hand.draw(self.screen)
+        return [button, *self.hand.get_cards()]
