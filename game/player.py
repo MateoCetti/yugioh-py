@@ -25,6 +25,7 @@ class Player:
         self._lifepoints -= lifepoints
 
     def draw_card(self):
+        if (len(self._deck) == 0): return
         self._hand.append(self._deck.pop())
 
     def get_hand(self):
