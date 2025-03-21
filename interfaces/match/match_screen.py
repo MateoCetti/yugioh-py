@@ -1,7 +1,7 @@
 import pygame
 
 from .hand import handInterface
-from .button import Button
+from ..components.button import Button
 from .. import colors
 from ..screen import Screen
 
