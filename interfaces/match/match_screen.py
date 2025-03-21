@@ -3,7 +3,7 @@ import pygame
 from .hand import handInterface
 from .button import Button
 from .. import colors
-from ..event_handler import EventHandler
+from events.event_handler import EventHandler
 
 from game.player import Player
 

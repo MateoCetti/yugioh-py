@@ -24,6 +24,7 @@ class EventHandler:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
                 self.dragging = True
+                # TODO: check if object is on top of others
                 for event in self.subscribers["on_mouse_button_down"]:
                     is_inside = event.check_if_inside(x, y)
                     if(is_inside):
