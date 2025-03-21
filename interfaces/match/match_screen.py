@@ -4,6 +4,7 @@ from .hand import handInterface
 from ..components.button import Button
 from .. import colors
 from ..screen import Screen
+from .field import FieldInterface
 
 from events.event_handler import EventHandler
 from game.player import Player
@@ -19,6 +20,7 @@ class MatchScreen(Screen):
             500, 500, 100, 25, colors.BLUE, "draw", self.player.draw_card
         )
         self.hand = handInterface()
+        self.field = FieldInterface()
         self.event_handler.add_subscriber("on_mouse_button_down", self.button)
 
     def _update_events(self):
@@ -32,5 +34,6 @@ class MatchScreen(Screen):
 
     def draw_screen(self):
         self.screen.fill(colors.GRAY)
+        self.field.draw(self.screen)
         self.button.draw(self.screen)
         self.hand.draw(self.screen)

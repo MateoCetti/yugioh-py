@@ -1,6 +1,7 @@
 # Definir colores
 
 
+GREEN = (102, 255, 102)
 WHITE = (255, 255, 255)
 GRAY = (200, 200, 200)
 NORMAL_MONSTER_BG = (255, 173, 51)
