@@ -10,8 +10,8 @@ class EventHandler:
         }
         self.dragging = False
 
-    def set_subscribers(self, event_type, subscribers):
-        self.subscribers[event_type] = subscribers
+    def add_subscriber(self, event_type, subscriber):
+        self.subscribers[event_type].append(subscriber)
 
     def remove_subscriber(self, event_type, index):
         self.subscribers[event_type].pop(index)

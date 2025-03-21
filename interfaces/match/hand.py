@@ -13,10 +13,12 @@ class handInterface():
         for card in self._hand:
             card.draw_straight(screen)
     
-    def create_card(self, card: Card):
+    def create_card(self, card: Card) -> CardInterface:
         cards = len(self._hand)
         xy = pygame.Vector2(400+200*cards, 700)
-        self._hand.append(CardInterface(card.image,xy , 0.2))
+        newCard = CardInterface(card.image,xy , 0.2)
+        self._hand.append(newCard)
+        return newCard
 
     def get_cards(self):
         return self._hand

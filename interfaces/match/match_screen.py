@@ -17,14 +17,12 @@ class MatchScreen:
             500, 500, 100, 25, colors.BLUE, "draw", self.player.draw_card
         )
         self.hand = handInterface()
-        
+        self.event_handler.add_subscriber("on_mouse_button_down", self.button)
 
     def _update_events(self):
         if len(self.player.get_hand()) > len(self.hand.get_cards()):
-            self.hand.create_card(self.player.get_hand()[-1])
-        self.event_handler.set_subscribers(
-            "on_mouse_button_down", [self.button, *self.hand.get_cards()]
-        )
+            card = self.hand.create_card(self.player.get_hand()[-1])
+            self.event_handler.add_subscriber("on_mouse_button_down", card)
 
     def handle_events(self) -> bool:
         self._update_events()
