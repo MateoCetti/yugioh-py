@@ -7,12 +7,13 @@ from ..screen import Screen
 
 from events.event_handler import EventHandler
 from game.player import Player
+from decks.yugi_deck.deck import yugi_deck
 
 
 class MatchScreen(Screen):
-    def __init__(self, screen, player: Player):
+    def __init__(self, screen):
         self.event_handler = EventHandler()
-        self.player = player
+        self.player = Player(lifepoints=8000, deck=yugi_deck)
         self.screen = screen
         self.button = Button(
             500, 500, 100, 25, colors.BLUE, "draw", self.player.draw_card
