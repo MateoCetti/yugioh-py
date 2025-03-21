@@ -3,12 +3,13 @@ import pygame
 from .hand import handInterface
 from .button import Button
 from .. import colors
-from events.event_handler import EventHandler
+from ..screen import Screen
 
+from events.event_handler import EventHandler
 from game.player import Player
 
 
-class MatchScreen:
+class MatchScreen(Screen):
     def __init__(self, screen, player: Player):
         self.event_handler = EventHandler()
         self.player = player
