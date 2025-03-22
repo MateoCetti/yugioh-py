@@ -1,6 +1,6 @@
 # Definir colores
 
-
+RED = (255, 0, 0)
 GREEN = (102, 255, 102)
 WHITE = (255, 255, 255)
 GRAY = (200, 200, 200)
