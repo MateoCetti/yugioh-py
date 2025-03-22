@@ -22,6 +22,8 @@ class MatchScreen(Screen):
         self.hand = handInterface()
         self.field = FieldInterface()
         self.event_handler.add_subscriber("on_mouse_button_down", self.button)
+        for zone in self.field.get_zones():
+            self.event_handler.add_subscriber("intersection", zone)
 
     def _update_events(self):
         if len(self.player.get_hand()) > len(self.hand.get_cards()):

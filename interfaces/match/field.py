@@ -36,3 +36,6 @@ class FieldInterface():
         )
         for zone in [*self.zones_1.values(), *self.zones_2.values()]:
             zone.draw(display)
+
+    def get_zones(self):
+        return [*self.zones_1.values(), *self.zones_2.values()]

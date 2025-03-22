@@ -25,3 +25,6 @@ class CardInterface(Event):
 
     def intersected(self, object):
         print(f"${id(object)}: {object.rect} | {id(self)} {self.rect}")
+
+    def reset_intersect(self):
+        pass

@@ -21,6 +21,7 @@ class EventHandler:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return False
+            
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
                 self.dragging = True
@@ -29,6 +30,7 @@ class EventHandler:
                     is_inside = event.check_if_inside(x, y)
                     if(is_inside):
                         self.subscribers["on_mouse_motion"].append(event)
+
             elif event.type == pygame.MOUSEMOTION:
                 if self.dragging:
                     x, y = event.pos
@@ -41,6 +43,7 @@ class EventHandler:
                 self.dragging = False
                 if event.button == 1:  # Clic izquierdo
                     self.subscribers["on_mouse_motion"] = []
+
             elif event.type == pygame.KEYDOWN:
                 if event.dict["key"] == 27:
                     return False
@@ -49,5 +52,6 @@ class EventHandler:
             for event2 in self.subscribers["intersection"]:
                 if (event != event2 and event.check_if_intersects(event2)):
                     event2.intersected(event)
-
+                    return True
+            event.reset_intersect()
         return True
