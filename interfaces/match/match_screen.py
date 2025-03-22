@@ -27,6 +27,7 @@ class MatchScreen(Screen):
         if len(self.player.get_hand()) > len(self.hand.get_cards()):
             card = self.hand.create_card(self.player.get_hand()[-1])
             self.event_handler.add_subscriber("on_mouse_button_down", card)
+            self.event_handler.add_subscriber("intersection", card)
 
     def handle_events(self) -> bool:
         self._update_events()

@@ -1,6 +1,6 @@
 import pygame
 # from event import Event
-EVENT_TYPES = ("on_mouse_button_down", "on_mouse_motion", "on_key_down")
+EVENT_TYPES = ("on_mouse_button_down", "on_mouse_motion", "on_key_down", "intersection")
 
 
 class EventHandler:
@@ -44,5 +44,10 @@ class EventHandler:
             elif event.type == pygame.KEYDOWN:
                 if event.dict["key"] == 27:
                     return False
+                
+        for event in self.subscribers["intersection"]:
+            for event2 in self.subscribers["intersection"]:
+                if (event != event2 and event.check_if_intersects(event2)):
+                    event2.intersected(event)
 
         return True
