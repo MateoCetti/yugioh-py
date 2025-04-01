@@ -13,30 +13,44 @@ from decks.yugi_deck.deck import yugi_deck
 
 class MatchScreen(Screen):
     def __init__(self, screen):
-        self.event_handler = EventHandler()
         self.player = Player(lifepoints=8000, deck=yugi_deck)
         self.screen = screen
-        self.button = Button(
-            500, 500, 100, 25, colors.BLUE, "draw", self.player.draw_card
-        )
-        self.hand = handInterface()
+        self.hand = handInterface(self.player)
         self.field = FieldInterface()
-        self.event_handler.add_subscriber("on_mouse_button_down", self.button)
-        for zone in self.field.get_zones():
-            self.event_handler.add_subscriber("intersection", zone)
+        self.button = Button(
+            500, 500, 100, 25, colors.BLUE, "draw", self.hand.draw_card
+        )
 
-    def _update_events(self):
-        if len(self.player.get_hand()) > len(self.hand.get_cards()):
-            card = self.hand.create_card(self.player.get_hand()[-1])
-            self.event_handler.add_subscriber("on_mouse_button_down", card)
-            self.event_handler.add_subscriber("intersection", card)
-
-    def handle_events(self) -> bool:
-        self._update_events()
-        return self.event_handler.handle_events()
 
     def draw_screen(self):
         self.screen.fill(colors.GRAY)
         self.field.draw(self.screen)
         self.button.draw(self.screen)
         self.hand.draw(self.screen)
+    
+    def intersections(self):
+        self.hand.cards_zones(self.field.get_zones())
+                    
+            
+
+
+    def handle_events(self) -> bool:
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                self.button.check_if_inside(x,y)
+            elif event.type == pygame.MOUSEMOTION:
+                if pygame.mouse.get_pressed()[0]:
+                    x, y = event.pos
+                    for card in self.hand.get_cards():
+                        aux = card.check_if_inside(x, y)
+                        if aux:
+                            break
+            elif event.type == pygame.KEYDOWN:
+                if event.dict["key"] == 27:
+                    return False
+        self.intersections()
+        return True
