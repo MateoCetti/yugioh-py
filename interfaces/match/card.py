@@ -22,6 +22,8 @@ class CardInterface(Event):
     def check_if_intersects(self, object):
         if(self.rect.colliderect(object.rect)):
             object.intersected(self)
+            return True
+        return False
 
     def intersected(self, object):
         print(f"${id(object)}: {object.rect} | {id(self)} {self.rect}")
