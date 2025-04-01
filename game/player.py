@@ -26,10 +26,12 @@ class Player:
 
     def draw_card(self):
         if (len(self._deck) == 0): return
-        self._hand.append(self._deck.pop())
+        card = self._deck.pop()
+        self._hand.append(card)
+        return card
 
     def get_hand(self):
-        return self._hand.copy()
+        return self._hand
 
     def get_field(self):
         return self._field
