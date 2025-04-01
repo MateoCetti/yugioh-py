@@ -12,6 +12,9 @@ class Zone():
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
+        if self.card:
+            self.card.draw_straight(screen)
+
 
     def check_if_intersects(self, object):
         if(self.rect.colliderect(object.rect)):
